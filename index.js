@@ -7,13 +7,13 @@ const { response } = require("express");
 
 const url = "https://r6.tracker.network/profile/pc/";
 
-//root site
+//// root site
 app.get("/", (req, res) => {
   res.json({ message: "this is the root endpoint goto /api/:username" });
 });
 
 //express stuff
-app.get("/api/:name", (req, res) => {
+app.get("/:name", (req, res) => {
   findBaseInfo(req.params.name).then((body) => {
     const $ = cheerio.load(body);
     //user name
