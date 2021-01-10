@@ -7,6 +7,11 @@ const { response } = require("express");
 
 const url = "https://r6.tracker.network/profile/pc/";
 
+//root site
+app.get("/", (req, res) => {
+  res.json({ message: "this is the root endpoint goto /api/:username" });
+});
+
 //express stuff
 app.get("/api/:name", (req, res) => {
   findBaseInfo(req.params.name).then((body) => {
@@ -30,10 +35,11 @@ app.get("/api/:name", (req, res) => {
     //average seasonal mmr
     const avgMmr = $(".trn-defstat__value").eq(3).text().trim();
     //one top operator
-    const topOp = $(".top-operators .trn-defstat__value img:nth-child(1)")
+    const topOpImage = $(".top-operators .trn-defstat__value img:nth-child(1)")
       .attr("src")
       .trim();
     //
+
     const info = {
       name,
       proView,
@@ -41,7 +47,7 @@ app.get("/api/:name", (req, res) => {
       mmrRating,
       rankText,
       avgMmr,
-      topOp,
+      topOpImage,
     };
     res.json(info);
   });
